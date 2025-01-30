@@ -48,6 +48,7 @@ async function createUser(userData) {
 // Iniciar sesión
 const loginUser = async ({ username, pwd }) => {
   try {
+    console.log(`🔍 Buscando usuario: ${username}`);
     const user = await User.findOne({
       where: {
         [Sequelize.Op.or]: [

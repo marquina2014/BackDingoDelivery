@@ -26,6 +26,10 @@ const InfoComercio = sequelize.define('InfoComercio', {
     Direccion: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    Disponible: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
     }
 }, {
     timestamps: true,

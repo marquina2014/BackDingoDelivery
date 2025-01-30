@@ -30,7 +30,7 @@ const Pedido = sequelize.define('Pedido', {
         },
     },
     Estatus: {
-        type: DataTypes.ENUM('Buscando Repartidor', 'En Proceso', 'Completado'),
+        type: DataTypes.ENUM('Buscando Repartidor', 'En Proceso', 'Cancelado','Completado'),
         defaultValue: 'Buscando Repartidor',
     },
     Desde: {
@@ -60,13 +60,12 @@ const Pedido = sequelize.define('Pedido', {
     Foto_Pedido: {
         type: DataTypes.TEXT,
     },
-    Fecha: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
-    },
     Precio: {
         type: DataTypes.FLOAT,
+        allowNull: false,
+    },
+    Num_Pedido: {
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
 }, {

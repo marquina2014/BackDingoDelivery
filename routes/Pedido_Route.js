@@ -1,54 +1,26 @@
 const express = require('express');
 const router = express.Router();
-const Pedido = require('../models/info_pedido');
-const { verifyJWT } = require('../middlewares/auth');
+const { createPedido } = require('../services/pedidoService');  // Asegúrate de que la lógica de crear pedido está en `pedidoService.js`
 
-// Ruta para obtener pedidos pendientes
-router.get('/pending', verifyJWT, async (req, res) => {
+// Ruta para crear un pedido
+router.post('/create', async (req, res) => {
     try {
-        const pedidos = await Pedido.findAll({
-            where: { Estatus: 'Buscando Repartidor' },
-            attributes: ['ID', 'Descripcion', 'Desde_Lat', 'Desde_Lon', 'Hasta_Lat', 'Hasta_Lon', 'Desde', 'Hasta']
+        const pedidoData = req.body;
+
+        // Validar que los datos esenciales estén presentes
+        if (!pedidoData.description || !pedidoData.comercioId || !pedidoData.desde || !pedidoData.hasta) {
+            return res.status(400).json({ error: 'Faltan datos esenciales para crear el pedido.' });
+        }
+
+        const nuevoPedido = await createPedido(pedidoData);
+
+        res.status(201).json({
+            message: 'Pedido creado exitosamente.',
+            pedido: nuevoPedido
         });
-
-        res.status(200).json(pedidos);
     } catch (error) {
-        console.error('Error al obtener pedidos:', error);
-        res.status(500).json({ error: 'Error al obtener los pedidos' });
-    }
-});
-
-// Ruta para crear un nuevo pedido
-router.post('/create', verifyJWT, async (req, res) => {
-    try {
-        const {
-            Descripcion,
-            Comercio_ID,
-            Desde,
-            Desde_Lat,
-            Desde_Lon,
-            Hasta,
-            Hasta_Lat,
-            Hasta_Lon,
-            Foto_Pedido
-        } = req.body;
-
-        const nuevoPedido = await Pedido.create({
-            Descripcion,
-            Comercio_ID,
-            Desde,
-            Desde_Lat,
-            Desde_Lon,
-            Hasta,
-            Hasta_Lat,
-            Hasta_Lon,
-            Foto_Pedido
-        });
-
-        res.status(201).json({ message: 'Pedido creado exitosamente', pedido: nuevoPedido });
-    } catch (error) {
-        console.error('Error al crear pedido:', error);
-        res.status(500).json({ error: 'Error al crear el pedido' });
+        console.error('Error al crear el pedido:', error);
+        res.status(500).json({ error: error.message || 'Error interno del servidor' });
     }
 });
 

@@ -1,14 +1,13 @@
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const path = require('path'); // Importar path para manejar rutas de archivos
+const path = require('path');  // Importar path para manejar rutas de archivos
 
-// Importar los modelos (sincronización ocurre en cada archivo)
+require('dotenv').config();  // Configuración de entorno
 require('./models/user_model');
 require('./models/Comercio_model');
 require('./models/repartidor_model');
-require('./models/info_pedido');
+require('./models/info_pedido');  // Asegúrate de importar el modelo de Pedido
 
 const app = express();
 
@@ -29,7 +28,8 @@ app.use('/Foto_Comercios', express.static(path.join(__dirname, 'Foto_Comercios')
 
 // Rutas
 app.use('/user', require('./routes/User_route.js'));
-app.use('/commerce', require('./routes/commerceRoutes.js')); // Ruta para comercios
+app.use('/commerce', require('./routes/commerceRoutes.js'));
+app.use('/pedido', require('./routes/Pedido_Route.js'));  // Ruta de pedidos
 
 // Ruta base
 app.get('/', (req, res) => res.json({ message: 'Servidor funcionando correctamente' }));
