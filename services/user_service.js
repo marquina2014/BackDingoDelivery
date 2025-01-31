@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize'); // Importar Sequelize
-const sequelize = require('../config/pg_config'); // Tu configuración de Sequelize
+const sequelize = require('../Config/pg_config'); // Tu configuración de Sequelize
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user_model');

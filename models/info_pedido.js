@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/pg_config');
+const sequelize = require('../Config/pg_config');
 const InfoComercio = require('./Comercio_model');
 const InfoRepartidor = require('./repartidor_model');
 
@@ -62,10 +62,6 @@ const Pedido = sequelize.define('Pedido', {
     },
     Precio: {
         type: DataTypes.FLOAT,
-        allowNull: false,
-    },
-    Num_Pedido: {
-        type: DataTypes.INTEGER,
         allowNull: false,
     },
 }, {

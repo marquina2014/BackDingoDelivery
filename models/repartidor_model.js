@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/pg_config');
+const sequelize = require('../Config/pg_config');
 const User = require('./user_model');
 
 const InfoRepartidor = sequelize.define('InfoRepartidor', {
