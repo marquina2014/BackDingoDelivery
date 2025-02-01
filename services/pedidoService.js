@@ -76,8 +76,7 @@ async function createPedido(pedidoData) {
     // Crear el pedido en la base de datos
     const nuevoPedido = await Pedido.create({
       Descripcion: description,
-      Comercio_ID: comercioId,
-      Repartidor_ID: repartidorId || null,  // Si no hay repartidor, dejar null
+      Comercio_ID: comercioId,   // Si no hay repartidor, dejar null
       Estatus: 'Buscando Repartidor',  // Estado inicial del pedido
       Desde: desde,
       Desde_Lat: desdeLat,
@@ -88,9 +87,10 @@ async function createPedido(pedidoData) {
       Foto_Pedido: fotoPedido || null,  // Si no se proporciona foto, dejar null
       Precio: precio
     });
-
+    console.log(nuevoPedido);
     return nuevoPedido;  // Devolver el pedido creado
   } catch (error) {
+    
     console.error('Error al crear el pedido:', error);
     throw new Error('No se pudo crear el pedido. Inténtelo nuevamente.');
   }

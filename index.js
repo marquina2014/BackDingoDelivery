@@ -25,6 +25,8 @@ app.use(cookieParser());
 // Middleware para servir las carpetas de fotos
 app.use('/Foto_ID', express.static(path.join(__dirname, 'Foto_ID')));
 app.use('/Foto_Comercios', express.static(path.join(__dirname, 'Foto_Comercios')));
+app.use('/Pedido_ID', express.static(path.join(__dirname, 'Pedido_ID')));
+
 
 // Rutas
 app.use('/user', require('./routes/User_route.js'));

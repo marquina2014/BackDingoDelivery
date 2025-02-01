@@ -1,7 +1,8 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../Config/pg_config');
 const InfoComercio = require('./Comercio_model');
-const InfoRepartidor = require('./repartidor_model');
+//const InfoRepartidor = require('./repartidor_model');
+const User = require('./user_model');
 
 const Pedido = sequelize.define('Pedido', {
     ID: {
@@ -25,7 +26,7 @@ const Pedido = sequelize.define('Pedido', {
         type: DataTypes.UUID,
         allowNull: true,
         references: {
-            model: InfoRepartidor,
+            model: User,
             key: 'ID',
         },
     },
